@@ -70,6 +70,14 @@ class MLLPRequestHandler(StreamRequestHandler):
         StreamRequestHandler.setup(self)
 
     def handle(self):
+        while True:
+            try:
+                self.handle0()
+            excpet Exception:
+                self.request.close()
+        self.request.close()
+            
+    def handle0(self):
         end_seq = self.eb + self.cr
         try:
             line = self.request.recv(3)
@@ -100,7 +108,7 @@ class MLLPRequestHandler(StreamRequestHandler):
             else:
                 # encode the response
                 self.wfile.write(response.encode(self.encoding))
-        self.request.close()
+        #self.request.close()
 
     def _extract_hl7_message(self, msg):
         message = None
