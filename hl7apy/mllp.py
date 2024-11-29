@@ -73,7 +73,7 @@ class MLLPRequestHandler(StreamRequestHandler):
         while True:
             try:
                 self.handle0()
-            excpet Exception:
+            except Exception:
                 self.request.close()
         self.request.close()
             
